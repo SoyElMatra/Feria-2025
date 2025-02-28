@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Pacman.c
+SOURCEFILES_QUOTED_IF_SPACED=Fantasma+.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Pacman.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Pacman.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Fantasma+.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Fantasma+.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Pacman.o
+OBJECTFILES=${OBJECTDIR}/Fantasma+.o
 
 # Source Files
-SOURCEFILES=Pacman.c
+SOURCEFILES=Fantasma+.c
 
 
 
@@ -98,28 +98,28 @@ sourceline.gcccompat=sourceline="\#device ANSI" sourceline="\#device PASS_STRING
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/Pacman.o: Pacman.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/Fantasma+.o: Fantasma+.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR} 
 ifeq (1,1) 
 	${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC}  out="${OBJECTDIR}"  Pacman.c +FM +DF +CC #__DEBUG=1 +ICD +Y=9 +EA +DF +LN +T +A +M +J +Z -P #__16F886=1 
-	@mv ${OBJECTDIR}/Pacman.cof "dist/${CND_CONF}/${IMAGE_TYPE}/Feria.X.${IMAGE_TYPE}.cof" 
-	@mv ${OBJECTDIR}/Pacman.hex "dist/${CND_CONF}/${IMAGE_TYPE}/Feria.X.${IMAGE_TYPE}.hex"
+	${MP_CC}  out="${OBJECTDIR}"  Fantasma+.c +FM +DF +CC #__DEBUG=1 +ICD +Y=9 +EA +DF +LN +T +A +M +J +Z -P #__16F886=1 
+	@mv ${OBJECTDIR}/Fantasma+.cof "dist/${CND_CONF}/${IMAGE_TYPE}/Feria.X.${IMAGE_TYPE}.cof" 
+	@mv ${OBJECTDIR}/Fantasma+.hex "dist/${CND_CONF}/${IMAGE_TYPE}/Feria.X.${IMAGE_TYPE}.hex"
 else 
-	${MP_CC}  out=""${OBJECTDIR}"" Pacman.c +EXPORT +FM +DF +CC #__DEBUG=1 +ICD +Y=9 +EA +DF +LN +T +A +M +J +Z -P #__16F886=1 +EXPORTD="${OBJECTDIR}"  
+	${MP_CC}  out=""${OBJECTDIR}"" Fantasma+.c +EXPORT +FM +DF +CC #__DEBUG=1 +ICD +Y=9 +EA +DF +LN +T +A +M +J +Z -P #__16F886=1 +EXPORTD="${OBJECTDIR}"  
 	
 endif 
 	
 else
-${OBJECTDIR}/Pacman.o: Pacman.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/Fantasma+.o: Fantasma+.c  nbproject/Makefile-${CND_CONF}.mk
 	${MKDIR} ${OBJECTDIR} 
 ifeq (1,1) 
 	${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_CC}  out="${OBJECTDIR}"  Pacman.c +FM +DF +CC +Y=9 +EA +DF +LN +T +A +M +J +Z -P #__16F886=1 
-	@mv ${OBJECTDIR}/Pacman.cof "dist/${CND_CONF}/${IMAGE_TYPE}/Feria.X.${IMAGE_TYPE}.cof" 
-	@mv ${OBJECTDIR}/Pacman.hex "dist/${CND_CONF}/${IMAGE_TYPE}/Feria.X.${IMAGE_TYPE}.hex"
+	${MP_CC}  out="${OBJECTDIR}"  Fantasma+.c +FM +DF +CC +Y=9 +EA +DF +LN +T +A +M +J +Z -P #__16F886=1 
+	@mv ${OBJECTDIR}/Fantasma+.cof "dist/${CND_CONF}/${IMAGE_TYPE}/Feria.X.${IMAGE_TYPE}.cof" 
+	@mv ${OBJECTDIR}/Fantasma+.hex "dist/${CND_CONF}/${IMAGE_TYPE}/Feria.X.${IMAGE_TYPE}.hex"
 else 
-	${MP_CC}  out=""${OBJECTDIR}"" Pacman.c +EXPORT +FM +DF +CC +Y=9 +EA +DF +LN +T +A +M +J +Z -P #__16F886=1 +EXPORTD="${OBJECTDIR}"  
+	${MP_CC}  out=""${OBJECTDIR}"" Fantasma+.c +EXPORT +FM +DF +CC +Y=9 +EA +DF +LN +T +A +M +J +Z -P #__16F886=1 +EXPORTD="${OBJECTDIR}"  
 	
 endif 
 	
@@ -133,7 +133,7 @@ dist/${CND_CONF}/${IMAGE_TYPE}/Feria.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTF
 ifeq (1,1) 
 	
 else 
-	${MP_LD}   out="dist/${CND_CONF}/${IMAGE_TYPE}"  +FM +DF +CC LINK=Feria.X.${IMAGE_TYPE}.hex=${OBJECTDIR}/Pacman.o +Y=9 +EA +DF +LN +T +A +M +J +Z -P
+	${MP_LD}   out="dist/${CND_CONF}/${IMAGE_TYPE}"  +FM +DF +CC LINK=Feria.X.${IMAGE_TYPE}.hex=${OBJECTDIR}/Fantasma+.o +Y=9 +EA +DF +LN +T +A +M +J +Z -P
 	
 endif 
 	
@@ -143,7 +143,7 @@ dist/${CND_CONF}/${IMAGE_TYPE}/Feria.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTF
 ifeq (1,1) 
 	
 else 
-	${MP_LD}   out="dist/${CND_CONF}/${IMAGE_TYPE}"  +FM +DF +CC LINK=Feria.X.${IMAGE_TYPE}.hex=${OBJECTDIR}/Pacman.o +Y=9 +EA +DF +LN +T +A +M +J +Z -P
+	${MP_LD}   out="dist/${CND_CONF}/${IMAGE_TYPE}"  +FM +DF +CC LINK=Feria.X.${IMAGE_TYPE}.hex=${OBJECTDIR}/Fantasma+.o +Y=9 +EA +DF +LN +T +A +M +J +Z -P
 	
 endif 
 	

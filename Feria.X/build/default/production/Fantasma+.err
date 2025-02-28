@@ -1,3 +1,4 @@
-      Memory usage:   ROM=12%      RAM=8% - 10%
-      0 Errors,  0 Warnings.
+C:\Users\Electronica\Documents\Feria-2025\Feria.X\Fantasma+.c:26:7:  Warning#202  Variable never used:   duration
+      Memory usage:   ROM=9%      RAM=8% - 10%
+      0 Errors,  1 Warnings.
 Build Successful.

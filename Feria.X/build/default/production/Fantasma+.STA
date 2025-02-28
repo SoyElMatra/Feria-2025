@@ -1,9 +1,9 @@
 
-ROM used:   1022/8192 (12%)
-            1022/8192 (12%) including unused fragments
+ROM used:   769/8192 (9%)
+            769/8192 (9%) including unused fragments
 
-            0.4 Average locations per line
-            2.0 Average locations per statement
+            0.3 Average locations per line
+            1.7 Average locations per statement
 
 RAM used:   28/368 (8%) at main() level
             36/368 (10%) worst case
@@ -13,57 +13,53 @@ Stack size: 8
 
 Lines Stmts  %   Files
 ----- ----- ---  -----
-  208   143  28  Fantasma+.c
-  751     0   0  C:\Program Files (x86)\PICC\Devices\16F886.h
-   37     0   0  C:\Program Files (x86)\PICC\Drivers\stdio.h
-  423     0   0  C:\Program Files (x86)\PICC\Drivers\string.h
-   32     0   0  C:\Program Files (x86)\PICC\Drivers\stddef.h
-   28     0   0  C:\Program Files (x86)\PICC\Drivers\ctype.h
- 1351   359  72  C:\Program Files (x86)\PICC\Drivers\stdlib.h
+  214   102  22  Fantasma+.c
+  751     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Devices\16F886.h
+   37     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdio.h
+  423     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\string.h
+   32     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\stddef.h
+   28     0   0  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\ctype.h
+ 1351   359  78  ..\..\..\..\..\Program Files (x86)\PICC\Drivers\stdlib.h
 ----- -----
- 2830   502 Total
+ 2836   461 Total
 
 Page ROM  %  RAM   Vol Diff  Functions:
 ---- --- --- ---   --- ----  ----------
-0     21   2    1             @delay_ms1
-0     37   4    5             @DIV1616
+0     21   3    1             @delay_ms1
 0     17   2    0    67  1.2  stop
  Inline         1   123  2.4  Adelante
 0      7   1    0             @const902
-0     88   9    4             @PSTRINGC7_9600_62_63
+0     88  11    4             @PSTRINGC7_9600_62_63
  Inline         1   123  2.4  Derecha
 0      6   1    0             @const905
  Inline         1   123  2.4  izquierda
 0      7   1    0             @const907
-0    101  10    0   154  3.2  action
-0     72   7    0   275  3.2  sr04distDelante
-0     69   7    0   250  3.2  sr04distDerecha
-0     72   7    0   275  3.2  sr04distIzquierda
-0     35   3    0   250  2.7  posicion
-0    278  27    1  1584  8.7  MAIN
-0     10   1    0             @const916
-0     89   9    5             @PSTRINGCN7_9600_62_63
-0     89   9    9             @PRINTF_LU_9600_62_63
-0      9   1    0             @const921
-0     11   1    0             @const922
+0    101  13    0   154  3.2  action
+0     35   5    0   250  2.7  posicion
+0    275  36    1  1514  8.7  MAIN
+0     10   1    0             @const913
+0     89  12    5             @PSTRINGCN7_9600_62_63
+0     89  12    9             @PRINTF_LU_9600_62_63
+0      9   1    0             @const918
+0     11   1    0             @const919
  Inline         0             @cinit1
 
 Program metrics:
-    Functions               10
-    Statements              502
-    Comments                674
-    Volume (V)              4913
-    Difficulty (D)          32.1
-    Effort to implement (E) 157528
-    Time to implement (T)   2 hours, 26 minutes
+    Functions               7
+    Statements              461
+    Comments                729
+    Volume (V)              3280
+    Difficulty (D)          22.5
+    Effort to implement (E) 73865
+    Time to implement (T)   1 hours, 8 minutes
     Est Delivered Bugs (B)  1
     Cyclomatic Complexity   23
-    Maintainability (MI)    82
+    Maintainability (MI)    65
 
  Segment     Used  Free
 -----------  ----  ----
 00000-00003     4  0  
-00004-007FF  1018  1026  
+00004-007FF   765  1279  
 00800-00FFF     0  2048  
 01000-017FF     0  2048  
 01800-01FFF     0  2048  

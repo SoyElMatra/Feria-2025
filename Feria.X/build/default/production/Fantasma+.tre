@@ -1,13 +1,7 @@
 ÀÄFeria
-   ÀÄMAIN  0/278  Ram=1
+   ÀÄMAIN  0/275  Ram=1
       ÃÄ@cinit1  (Inline)  Ram=0
       ÃÄstop  0/17  Ram=0
-      ÃÄsr04distDelante  0/72  Ram=0
-      ³  ÀÄ@DIV1616  0/37  Ram=5
-      ÃÄsr04distDerecha  0/69  Ram=0
-      ³  ÀÄ@DIV1616  0/37  Ram=5
-      ÃÄsr04distIzquierda  0/72  Ram=0
-      ³  ÀÄ@DIV1616  0/37  Ram=5
       ÃÄposicion  0/35  Ram=0
       ÃÄaction  0/101  Ram=0
       ³  ÃÄAdelante  (Inline)  Ram=1

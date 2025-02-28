@@ -83,7 +83,7 @@ void action() {
             break;
     }
 }
-
+/*
 void sr04distDelante() {
     enable_interrupts(INT_TIMER1);
     output_low(TRIGDEL);
@@ -134,7 +134,7 @@ void sr04distIzquierda() {
     duration = get_timer1();
     distanceIzquierda = (duration / 58);
     disable_interrupts(INT_TIMER1);
-}
+}*/
 
 void posicion() {
     posA = 0;
@@ -160,9 +160,9 @@ void main() {
     set_timer0(0);
 
     while (TRUE) {
-        sr04distDelante();
+        /*sr04distDelante();
         sr04distDerecha();
-        sr04distIzquierda();
+        sr04distIzquierda();*/
         posicion();
         valor = posA;
 

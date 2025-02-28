@@ -1,7 +1,7 @@
 D G "__PCM__" 0 0 ""5.015""
 D G "__DEVICE__" 0 0 ""
-D G "__DATE__" 0 0 ""22-ago.-24""
-D G "__TIME__" 0 0 ""12:39:59""
+D G "__DATE__" 0 0 ""28-feb-25""
+D G "__TIME__" 0 0 ""11:49:40""
 D G "__16F886" 0 0 "1" "Standard Header file for the PIC16F886 device ////////////////"
 c L "set_tris_a" 1 3 6 "FUNCTION"
 v L "value" 1 39 "int8" `54 
@@ -1262,11 +1262,10 @@ F G "Adelante" 0 40 "void()" `901
 F G "Derecha" 0 50 "void()" `904 
 F G "izquierda" 0 60 "void()" `906 
 F G "action" 0 70 "void()" `908 
-F G "sr04distDelante" 0 87 "void()" `909 
-F G "sr04distDerecha" 0 103 "void()" `910 
-F G "sr04distIzquierda" 0 118 "void()" `911 
-F G "posicion" 0 133 "void()" `912 
-F G "MAIN" 0 148 "void()" `913 
+C L "posicion" 0 86 42 "FUNCTION"
+F G "posicion" 0 139 "void()" `909 
+F G "MAIN" 0 154 "void()" `910 
+C L "MAIN" 0 86 3 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep_ulpwu" 1 0

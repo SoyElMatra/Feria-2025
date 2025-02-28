@@ -72,13 +72,15 @@
         <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
         <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
       </makeCustomizationType>
-      <item path="Fantasma+.c" ex="true" overriding="false">
+      <item path="Fantasma+.c" ex="false" overriding="false">
+        <ccscompiler>
+        </ccscompiler>
       </item>
       <item path="Fantasma.c" ex="true" overriding="false">
         <ccscompiler>
         </ccscompiler>
       </item>
-      <item path="Pacman.c" ex="false" overriding="false">
+      <item path="Pacman.c" ex="true" overriding="false">
         <ccscompiler>
         </ccscompiler>
       </item>
