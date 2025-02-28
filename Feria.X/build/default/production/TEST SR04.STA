@@ -1,0 +1,66 @@
+
+ROM used:   1033/8192 (13%)
+            1033/8192 (13%) including unused fragments
+
+            0.4 Average locations per line
+            2.5 Average locations per statement
+
+RAM used:   27/368 (7%) at main() level
+            52/368 (14%) worst case
+
+Stack used: 2 worst case (2 in main + 0 for interrupts)
+Stack size: 8
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   89    54  13  TEST SR04.c
+  751     0   0  C:\Program Files (x86)\PICC\Devices\16F886.h
+   37     0   0  C:\Program Files (x86)\PICC\Drivers\stdio.h
+  423     0   0  C:\Program Files (x86)\PICC\Drivers\string.h
+   32     0   0  C:\Program Files (x86)\PICC\Drivers\stddef.h
+   28     0   0  C:\Program Files (x86)\PICC\Drivers\ctype.h
+ 1351   359  87  C:\Program Files (x86)\PICC\Drivers\stdlib.h
+----- -----
+ 2711   413 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     23   2    1             @delay_ms1
+ Inline        13             @MULFF
+0     29   3    2             @ITOF
+0     37   4    5             @DIV1616
+0     86   8    0   300  3.2  sr04distDelante
+0     86   8    0   300  3.2  sr04distDerecha
+0     86   8    0   300  3.2  sr04distIzquierda
+0    145  14    1   253  2.6  MAIN
+0      8   1    0             @const900
+0     89   9    5             @PSTRINGCN7_9600_62_63
+ Inline         5             @FTOSD
+0     79   8   13             @DIV3232
+0    343  33   13             @PRINTF_L32D_9600_62_63FPFPF
+0      8   1    0             @const911
+0     10   1    0             @const912
+ Inline         0             @cinit1
+
+Program metrics:
+    Functions               4
+    Statements              413
+    Comments                674
+    Volume (V)              1637
+    Difficulty (D)          11.1
+    Effort to implement (E) 18167
+    Time to implement (T)   17 minutes
+    Est Delivered Bugs (B)  0
+    Cyclomatic Complexity   1
+    Maintainability (MI)    112
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00003     4  0  
+00004-007FF  1029  1015  
+00800-00FFF     0  2048  
+01000-017FF     0  2048  
+01800-01FFF     0  2048  
+
+
+

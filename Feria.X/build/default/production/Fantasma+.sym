@@ -1,0 +1,121 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     @TRIS_C
+021-022 strtok.save
+023-026 _Randseed
+027     posA
+028     posB
+029     valor
+02A     check
+02B-02C duration
+02D-02E turns
+02F.0   testprintf
+030-031 distanceDelante
+032-033 distanceDerecha
+034-035 distanceIzquierda
+036-037 @PRINTF_LU_9600_62_63.P1
+036-037 @DIV1616.P2
+036     @PSTRINGCN7_9600_62_63.P3
+036     Adelante.@SCRATCH1
+036     @PSTRINGC7_9600_62_63.@SCRATCH1
+036     Derecha.@SCRATCH1
+036     izquierda.@SCRATCH1
+036     MAIN.@SCRATCH1
+037     @delay_ms1.P1
+037     @PSTRINGC7_9600_62_63.@SCRATCH2
+037     @PSTRINGCN7_9600_62_63.@SCRATCH1
+038-039 @DIV1616.P1
+038     @PSTRINGC7_9600_62_63.@SCRATCH3
+038     @PSTRINGCN7_9600_62_63.@SCRATCH2
+038     @PRINTF_LU_9600_62_63.@SCRATCH1
+039     @PSTRINGC7_9600_62_63.@SCRATCH4
+039     @PSTRINGCN7_9600_62_63.@SCRATCH3
+039     @PRINTF_LU_9600_62_63.@SCRATCH2
+03A     @DIV1616.@SCRATCH1
+03A     @PSTRINGCN7_9600_62_63.@SCRATCH4
+03A     @PRINTF_LU_9600_62_63.@SCRATCH3
+03B     @PRINTF_LU_9600_62_63.@SCRATCH4
+03C     @PRINTF_LU_9600_62_63.@SCRATCH5
+03D     @PRINTF_LU_9600_62_63.@SCRATCH6
+03E     @PRINTF_LU_9600_62_63.@SCRATCH7
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @const902.call
+00000B  @const905.call
+000011  @const907.call
+000018  @const916.call
+000022  @const921.call
+00002B  @const922.call
+000036  stop
+000047  @DIV1616
+00006C  sr04distDelante
+0000B4  sr04distDerecha
+0000F9  sr04distIzquierda
+000141  posicion
+000164  @PSTRINGC7_9600_62_63
+0001BC  @delay_ms1
+0001D1  action
+0001DC  Adelante
+0001F2  Derecha
+000212  izquierda
+000236  @PSTRINGCN7_9600_62_63
+00028F  @PRINTF_LU_9600_62_63
+0002E8  @cinit1
+0002E8  MAIN
+000310  @cinit2
+0136  StrtoulGO
+0136  StrtolGO
+
+Project Directory:
+    H:\Mi unidad\Feria 2024\MPLAB\Feria.X\
+
+Project Files:
+    Fantasma+.c                                             [22-ago.-24 12:40  CRC=CB61AA29]
+    C:\Program Files (x86)\PICC\Devices\16F886.h            [12-nov.-13 14:35  CRC=E3D32390]
+    C:\Program Files (x86)\PICC\Drivers\stdio.h             [31-jul.-07 13:24  CRC=4E4534F4]
+    C:\Program Files (x86)\PICC\Drivers\string.h            [14-jul.-11 10:13  CRC=23EDEC8F]
+    C:\Program Files (x86)\PICC\Drivers\stddef.h            [16-jul.-10 09:27  CRC=897CEC6C]
+    C:\Program Files (x86)\PICC\Drivers\ctype.h             [03-ene.-08 13:55  CRC=2D1F019F]
+    C:\Program Files (x86)\PICC\Drivers\stdlib.h            [08-jun.-11 14:39  CRC=0B6669CF]
+
+Source signature=EED0B0E5
+
+Units:
+    Fantasma+ (main)
+
+Compiler Settings:
+    Processor:      PIC16F886
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Predefined symbols:
+       #define __16F886 1
+
+Output Files:
+    XREF file:   build\default\production\Fantasma+.xsym
+    Errors:      build\default\production\Fantasma+.err
+    Ext Symbols: build\default\production\Fantasma+.esym
+    INHX8:       build\default\production\Fantasma+.hex
+    Symbols:     build\default\production\Fantasma+.sym
+    List:        build\default\production\Fantasma+.lst
+    Debug/COFF:  build\default\production\Fantasma+.cof
+    Project:     Fantasma+.ccspjt
+    Call Tree:   build\default\production\Fantasma+.tre
+    Statistics:  build\default\production\Fantasma+.STA

@@ -1,0 +1,121 @@
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+020     @TRIS_C
+021-022 strtok.save
+023-026 _Randseed
+027-028 duration
+029-02C distanceDelante
+02D-030 distanceDerecha
+031-034 distanceIzquierda
+035-036 @DIV1616.P1
+035-036 @ITOF.P2
+035     @PSTRINGCN7_9600_62_63.P3
+035-038 @PRINTF_L32D_9600_62_63FPFPF.P4
+035     MAIN.@SCRATCH1
+036     @delay_ms1.P1
+036     @PSTRINGCN7_9600_62_63.@SCRATCH1
+037-038 @DIV1616.P1
+037     @PSTRINGCN7_9600_62_63.@SCRATCH2
+038     @PSTRINGCN7_9600_62_63.@SCRATCH3
+039     @PRINTF_L32D_9600_62_63FPFPF.P1
+039     @DIV1616.@SCRATCH1
+039     @PSTRINGCN7_9600_62_63.@SCRATCH4
+03A     @PRINTF_L32D_9600_62_63FPFPF.@SCRATCH1
+03B     @PRINTF_L32D_9600_62_63FPFPF.@SCRATCH2
+03C     @PRINTF_L32D_9600_62_63FPFPF.@SCRATCH3
+03D     @PRINTF_L32D_9600_62_63FPFPF.@SCRATCH4
+03E     @PRINTF_L32D_9600_62_63FPFPF.@SCRATCH5
+03F     @PRINTF_L32D_9600_62_63FPFPF.@SCRATCH6
+040     @PRINTF_L32D_9600_62_63FPFPF.@SCRATCH7
+041     @PRINTF_L32D_9600_62_63FPFPF.@SCRATCH8
+042-045 @DIV3232.P1
+042-045 @FTOSD.P2
+042-045 @MULFF.P3
+046-049 @MULFF.P1
+046-049 @DIV3232.P2
+046     @FTOSD.@SCRATCH1
+04A     @MULFF.@SCRATCH1
+04A     @DIV3232.@SCRATCH1
+04B     @MULFF.@SCRATCH2
+04B     @DIV3232.@SCRATCH2
+04C     @MULFF.@SCRATCH3
+04C     @DIV3232.@SCRATCH3
+04D     @MULFF.@SCRATCH4
+04D     @DIV3232.@SCRATCH4
+04E     @MULFF.@SCRATCH5
+04E     @DIV3232.@SCRATCH5
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+107.6   C1OUT
+108.6   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @const900.call
+00000C  @const911.call
+000014  @const912.call
+00001E  @DIV1616
+000043  @ITOF
+000060  sr04distDelante
+0000B6  sr04distDerecha
+00010C  sr04distIzquierda
+000162  @PSTRINGCN7_9600_62_63
+0001BB  @DIV3232
+00020A  @PRINTF_L32D_9600_62_63FPFPF
+00021E  @MULFF
+0002A4  @FTOSD
+000361  @delay_ms1
+000378  @cinit1
+000378  MAIN
+00039A  @cinit2
+0136  StrtoulGO
+0136  StrtolGO
+
+Project Directory:
+    H:\Mi unidad\Feria 2024\MPLAB\Feria.X\
+
+Project Files:
+    TEST SR04.c                                             [22-ago.-24 11:25  CRC=DD58641A]
+    C:\Program Files (x86)\PICC\Devices\16F886.h            [12-nov.-13 14:35  CRC=E3D32390]
+    C:\Program Files (x86)\PICC\Drivers\stdio.h             [31-jul.-07 13:24  CRC=4E4534F4]
+    C:\Program Files (x86)\PICC\Drivers\string.h            [14-jul.-11 10:13  CRC=23EDEC8F]
+    C:\Program Files (x86)\PICC\Drivers\stddef.h            [16-jul.-10 09:27  CRC=897CEC6C]
+    C:\Program Files (x86)\PICC\Drivers\ctype.h             [03-ene.-08 13:55  CRC=2D1F019F]
+    C:\Program Files (x86)\PICC\Drivers\stdlib.h            [08-jun.-11 14:39  CRC=0B6669CF]
+
+Source signature=00C76AD6
+
+Units:
+    TEST SR04 (main)
+
+Compiler Settings:
+    Processor:      PIC16F886
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+    Predefined symbols:
+       #define __16F886 1
+
+Output Files:
+    XREF file:   build\default\production\TEST SR04.xsym
+    Errors:      build\default\production\TEST SR04.err
+    Ext Symbols: build\default\production\TEST SR04.esym
+    INHX8:       build\default\production\TEST SR04.hex
+    Symbols:     build\default\production\TEST SR04.sym
+    List:        build\default\production\TEST SR04.lst
+    Debug/COFF:  build\default\production\TEST SR04.cof
+    Project:     TEST SR04.ccspjt
+    Call Tree:   build\default\production\TEST SR04.tre
+    Statistics:  build\default\production\TEST SR04.STA

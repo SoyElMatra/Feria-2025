@@ -1,0 +1,8 @@
+C:\Users\Electronica\Downloads\Feria.X\Pacman.c:37:1:  Warning#203  Condition always TRUE
+C:\Users\Electronica\Downloads\Feria.X\Pacman.c:104:1:  Warning#203  Condition always TRUE
+C:\Users\Electronica\Downloads\Feria.X\Pacman.c:127:1:  Warning#216  Interrupts disabled during call to prevent re-entrancy:  (lcd_send_nibble)
+C:\Users\Electronica\Downloads\Feria.X\Pacman.c:127:1:  Warning#216  Interrupts disabled during call to prevent re-entrancy:  (lcd_send_byte)
+C:\Users\Electronica\Downloads\Feria.X\Pacman.c:127:1:  Warning#216  Interrupts disabled during call to prevent re-entrancy:  (@PSTRINGC7_640)
+      Memory usage:   ROM=23%      RAM=7% - 18%
+      0 Errors,  5 Warnings.
+Build Successful.
