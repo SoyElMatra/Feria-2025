@@ -10,15 +10,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TRIGDEL PIN_C0
-#define ECHODEL PIN_C1
-#define TRIGDER PIN_C2
-#define ECHODER PIN_C3
-#define TRIGIZQ PIN_C4
-#define ECHOIZQ PIN_C5
-#define turn 1100
-#define back 2200
-
 char posA;
 char posB;
 char valor;
@@ -83,7 +74,7 @@ void action() {
             break;
     }
 }
-/*
+
 void sr04distDelante() {
     enable_interrupts(INT_TIMER1);
     output_low(TRIGDEL);
@@ -101,40 +92,6 @@ void sr04distDelante() {
     distanceDelante = (duration / 58);
     disable_interrupts(INT_TIMER1);
 }
-
-void sr04distDerecha() {
-    enable_interrupts(INT_TIMER1);
-    output_low(TRIGDER);
-    delay_us(2);
-    output_high(TRIGDER);
-    delay_us(10);
-    output_low(TRIGDER);
-
-    while (!input(ECHODER));
-    set_timer1(0);
-    while (input(ECHODER));
-    duration = get_timer1();
-
-    distanceDerecha = (duration / 58);
-    disable_interrupts(INT_TIMER1);
-}
-
-void sr04distIzquierda() {
-    enable_interrupts(INT_TIMER1);
-    output_low(TRIGIZQ);
-    delay_us(2);
-    output_high(TRIGIZQ);
-    delay_us(10);
-    output_low(TRIGIZQ);
-    
-    set_timer1(0);
-    while (!input(ECHOIZQ));
-    set_timer1(0);
-    while (input(ECHOIZQ));
-    duration = get_timer1();
-    distanceIzquierda = (duration / 58);
-    disable_interrupts(INT_TIMER1);
-}*/
 
 void posicion() {
     posA = 0;
@@ -160,9 +117,7 @@ void main() {
     set_timer0(0);
 
     while (TRUE) {
-        /*sr04distDelante();
-        sr04distDerecha();
-        sr04distIzquierda();*/
+        sr04distDelante();
         posicion();
         valor = posA;
 
