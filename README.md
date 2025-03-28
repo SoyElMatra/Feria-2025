@@ -1,3 +1,3 @@
-\n-la mecha
-\n-osito gominola
-\n-cocalombia
+<br/>-la mecha
+<br/>-osito gominola
+<br/>-cocalombia
