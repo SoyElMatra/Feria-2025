@@ -1,18 +1,18 @@
 //sensores ubicacion pacman
-#define adelante A0
-#define izquierda A1
-#define derecha A2
-#define atras A3
+#define adelante 9
+#define izquierda 8
+#define derecha 7
+#define atras 6
 
 // Motor A Derecba
-#define ENA 3
+#define ENA A0
 #define IN1 2
-#define IN2 4
+#define IN2 3
 
 // Motor B Izquierda
-#define ENB 5
-#define IN3 6
-#define IN4 7
+#define ENB A1
+#define IN3 4
+#define IN4 5
 
 int fw;
 int bw;
@@ -29,9 +29,9 @@ int stp = 50;
 int stpsuave = 10;
 
 // Guardar el número de pin de Arduino al que está conectado el pin OUT del sensor
-#define SensorLeft 8    // input pin of left sensor
-#define SensorMiddle 9  // input pin of middle sensor
-#define SensorRight 10  // input pin of right sensor
+#define SensorLeft 10    // input pin of left sensor
+#define SensorMiddle 11  // input pin of middle sensor
+#define SensorRight 12  // input pin of right sensor
 
 void setup() {
   // Se indica que ese pin va a utilizarse para recibir información
