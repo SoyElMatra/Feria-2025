@@ -6,9 +6,9 @@
  (resolution mm 100000)
  (unit mm)
  (structure
-  (boundary (rect pcb -0.10160 -0.10160 50.10160 50.10160))
-  (boundary (path signal 0.20320 0.00000 0.00000 50.00000 0.00000 50.00000 50.00000
-   0.00000 50.00000 0.00000 0.00000))
+  (boundary (rect pcb -0.10160 -0.10160 50.10160 60.10160))
+  (boundary (path signal 0.20320 0.00000 0.00000 50.00000 0.00000 50.00000 60.00000
+   0.00000 60.00000 0.00000 0.00000))
   (flip_style mirror_first)
   (layer TOP (type signal) (direction off))
   (layer I1 (type signal) (direction off))
@@ -53,25 +53,25 @@
  (placement
   (component "CONN-SIL15_J1" (place J1 16.90000 25.66000 front -270))
   (component "CONN-SIL15_J6" (place J6 34.90000 25.62000 front -90))
-  (component RES40_R1 (place R1 11.80000 47.30000 front -90))
-  (component RES40_R2 (place R2 24.00000 47.30000 front 0))
-  (component RES40_R3 (place R3 22.90000 40.00000 front -90))
-  (component RES40_R4 (place R4 29.90000 16.54000 front 90))
-  (component RES40_R5 (place R5 26.60000 26.66000 front -90))
+  (component RES40_R1 (place R1 21.60000 54.30000 front -180))
+  (component RES40_R2 (place R2 28.00000 54.30000 front 0))
+  (component RES40_R3 (place R3 20.50000 46.20000 front -90))
+  (component RES40_R4 (place R4 30.50000 18.34000 front 90))
+  (component RES40_R5 (place R5 24.90000 28.46000 front -90))
   (component RES40_R6 (place R6 21.10000 4.10000 front 0))
-  (component RES40_R7 (place R7 21.10000 6.50000 front 0))
-  (component "CONN-SIL6_J2" (place J2 44.70000 27.00000 front -90))
-  (component "CONN-SIL4_J3" (place J3 44.70000 38.20000 front -90))
-  (component "CONN-SIL3_J4" (place J4 44.70000 46.80000 front -90))
-  (component "CONN-SIL2_J5" (place J5 5.60000 4.16000 front -90))
-  (component "CONN-SIL4_J7" (place J7 44.70000 3.18000 front -270))
-  (component "CONN-SIL3_J8" (place J8 5.60000 13.12000 front -270))
-  (component "CONN-SIL3_J9" (place J9 5.60000 26.82000 front -270))
-  (component "CONN-SIL3_J10" (place J10 5.40000 45.98000 front -90))
-  (component RES40_R8 (place R8 29.90000 29.90000 front -270))
-  (component RES40_R9 (place R9 26.60000 40.10000 front -90))
-  (component RES40_R10 (place R10 22.90000 26.70000 front -90))
-  (component RES40_R11 (place R11 31.30000 10.10000 front -180))
+  (component RES40_R7 (place R7 21.10000 7.60000 front 0))
+  (component "CONN-SIL6_J2" (place J2 44.70000 32.00000 front -90))
+  (component "CONN-SIL4_J3" (place J3 46.70000 43.20000 front -90))
+  (component "CONN-SIL3_J4" (place J4 44.70000 51.80000 front -90))
+  (component "CONN-SIL2_J5" (place J5 5.60000 11.16000 front -90))
+  (component "CONN-SIL4_J7" (place J7 44.70000 8.18000 front -270))
+  (component "CONN-SIL3_J8" (place J8 5.60000 20.12000 front -270))
+  (component "CONN-SIL3_J9" (place J9 5.60000 33.82000 front -270))
+  (component "CONN-SIL3_J10" (place J10 5.90000 52.98000 front -90))
+  (component RES40_R8 (place R8 30.50000 35.90000 front -270))
+  (component RES40_R9 (place R9 25.80000 46.20000 front -90))
+  (component RES40_R10 (place R10 20.40000 28.40000 front -90))
+  (component RES40_R11 (place R11 31.30000 11.10000 front -180))
  )
  (library
   (image "CONN-SIL15_J1" (side front)
@@ -113,7 +113,7 @@
   (image RES40_R1 (side front)
    (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
    (pin PS1 (rotate 0) 0 0.00000 0.00000)
-   (pin PS1 (rotate -180) 1 10.16000 0.00000)
+   (pin PS1 (rotate 180) 1 10.16000 0.00000)
   )
   (image RES40_R2 (side front)
    (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
@@ -604,7 +604,7 @@
      $VIA#0_POWER
     )
    )
-   (pins J1-0 R1-0 R2-0 R3-0 J5-1 J7-1 J8-0 J9-0 J10-0)
+   (pins J1-3 R1-0 R2-0 R3-0 J7-1 J8-0 J9-0 J10-0)
   )
   (net "VIN"
    (circuit
@@ -613,7 +613,7 @@
      $VIA#0_POWER
     )
    )
-   (pins J1-3)
+   (pins J1-0 J5-1)
   )
   (class POWER
    "3V3"
