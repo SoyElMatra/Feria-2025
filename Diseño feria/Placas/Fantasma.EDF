@@ -6,9 +6,9 @@
  (resolution mm 100000)
  (unit mm)
  (structure
-  (boundary (rect pcb -0.38100 -0.38100 50.38100 60.38100))
-  (boundary (path signal 0.20320 0.00000 0.00000 50.00000 0.00000 50.00000 60.00000
-   0.00000 60.00000 0.00000 0.00000))
+  (boundary (rect pcb -0.10160 -0.10160 50.10160 50.10160))
+  (boundary (path signal 0.20320 0.00000 0.00000 50.00000 0.00000 50.00000 50.00000
+   0.00000 50.00000 0.00000 0.00000))
   (flip_style mirror_first)
   (layer TOP (type signal) (direction off))
   (layer I1 (type signal) (direction off))
@@ -51,27 +51,18 @@
   )
  )
  (placement
-  (component "CONN-SIL15_J1" (place J1 16.90000 25.66000 front -270))
-  (component "CONN-SIL15_J6" (place J6 34.90000 25.62000 front -90))
-  (component RES40_R1 (place R1 21.60000 54.30000 front -180))
-  (component RES40_R2 (place R2 28.00000 53.30000 front 0))
-  (component RES40_R3 (place R3 20.50000 46.20000 front -90))
-  (component RES40_R4 (place R4 30.50000 18.34000 front 90))
-  (component RES40_R5 (place R5 24.90000 28.46000 front -90))
-  (component RES40_R6 (place R6 21.20000 6.30000 front 0))
-  (component RES40_R7 (place R7 21.20000 8.90001 front 0))
-  (component "CONN-SIL6_J2" (place J2 43.90000 32.10000 front -90))
-  (component "CONN-SIL4_J3" (place J3 43.90000 43.30000 front -90))
-  (component "CONN-SIL3_J4" (place J4 43.90000 51.90000 front -90))
-  (component "CONN-SIL2_J5" (place J5 7.20000 11.16000 front -90))
-  (component "CONN-SIL4_J7" (place J7 43.90000 6.88000 front -270))
-  (component "CONN-SIL3_J8" (place J8 7.30000 20.12000 front -270))
-  (component "CONN-SIL3_J9" (place J9 7.30000 34.82000 front -270))
-  (component "CONN-SIL3_J10" (place J10 7.30000 52.98000 front -90))
-  (component RES40_R8 (place R8 30.50000 35.90000 front -270))
-  (component RES40_R9 (place R9 25.80000 46.20000 front -90))
-  (component RES40_R10 (place R10 20.40000 28.40000 front -90))
-  (component RES40_R11 (place R11 31.30000 11.80000 front -180))
+  (component "CONN-SIL15_J1" (place J1 14.00000 24.60000 front 90))
+  (component "CONN-SIL15_J6" (place J6 30.00000 24.60000 front 270))
+  (component "CONN-SIL6_J2" (place J2 39.00000 30.30000 front 270))
+  (component "CONN-SIL2_J5" (place J5 4.00000 9.40000 front 270))
+  (component "CONN-SIL4_J7" (place J7 39.00000 12.92000 front 270))
+  (component "CONN-SIL3_J8" (place J8 45.30000 38.64000 front 90))
+  (component "CONN-SIL3_J9" (place J9 45.20000 26.62000 front 90))
+  (component "CONN-SIL3_J10" (place J10 39.10000 34.82000 front 90))
+  (component RES40_R1 (place R1 19.10000 14.42000 front -270))
+  (component RES40_R2 (place R2 22.20000 14.40000 front -270))
+  (component RES40_R3 (place R3 25.20000 14.40000 front -270))
+  (component "CONN-DIL8_J11" (place J11 3.96000 41.32000 front -90))
  )
  (library
   (image "CONN-SIL15_J1" (side front)
@@ -110,41 +101,6 @@
    (pin PS0 (rotate 0) 13 15.24000 0.00000)
    (pin PS0 (rotate 0) 14 17.78000 0.00000)
   )
-  (image RES40_R1 (side front)
-   (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
-   (pin PS1 (rotate 0) 0 0.00000 0.00000)
-   (pin PS1 (rotate 180) 1 10.16000 0.00000)
-  )
-  (image RES40_R2 (side front)
-   (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
-   (pin PS1 (rotate 0) 0 0.00000 0.00000)
-   (pin PS1 (rotate 0) 1 10.16000 0.00000)
-  )
-  (image RES40_R3 (side front)
-   (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
-   (pin PS1 (rotate 90) 0 0.00000 0.00000)
-   (pin PS1 (rotate 90) 1 10.16000 0.00000)
-  )
-  (image RES40_R4 (side front)
-   (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
-   (pin PS1 (rotate -90) 0 0.00000 0.00000)
-   (pin PS1 (rotate -90) 1 10.16000 0.00000)
-  )
-  (image RES40_R5 (side front)
-   (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
-   (pin PS1 (rotate 90) 0 0.00000 0.00000)
-   (pin PS1 (rotate 90) 1 10.16000 0.00000)
-  )
-  (image RES40_R6 (side front)
-   (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
-   (pin PS1 (rotate 0) 0 0.00000 0.00000)
-   (pin PS1 (rotate 0) 1 10.16000 0.00000)
-  )
-  (image RES40_R7 (side front)
-   (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
-   (pin PS1 (rotate 0) 0 0.00000 0.00000)
-   (pin PS1 (rotate 0) 1 10.16000 0.00000)
-  )
   (image "CONN-SIL6_J2" (side front)
    (outline (rect TOP -1.37160 -1.37160 14.07160 1.37160))
    (pin PS0 (rotate 0) 0 0.00000 0.00000)
@@ -153,19 +109,6 @@
    (pin PS0 (rotate 0) 3 7.62000 0.00000)
    (pin PS0 (rotate 0) 4 10.16000 0.00000)
    (pin PS0 (rotate 0) 5 12.70000 0.00000)
-  )
-  (image "CONN-SIL4_J3" (side front)
-   (outline (rect TOP -1.37160 -1.37160 8.99160 1.37160))
-   (pin PS0 (rotate 0) 0 0.00000 0.00000)
-   (pin PS0 (rotate 0) 1 2.54000 0.00000)
-   (pin PS0 (rotate 0) 2 5.08000 0.00000)
-   (pin PS0 (rotate 0) 3 7.62000 0.00000)
-  )
-  (image "CONN-SIL3_J4" (side front)
-   (outline (rect TOP -1.37160 -1.37160 6.45160 1.37160))
-   (pin PS0 (rotate 0) 0 0.00000 0.00000)
-   (pin PS0 (rotate 0) 1 2.54000 0.00000)
-   (pin PS0 (rotate 0) 2 5.08000 0.00000)
   )
   (image "CONN-SIL2_J5" (side front)
    (outline (rect TOP -1.37160 -1.37160 3.91160 1.37160))
@@ -197,25 +140,31 @@
    (pin PS0 (rotate 0) 1 2.54000 0.00000)
    (pin PS0 (rotate 0) 2 5.08000 0.00000)
   )
-  (image RES40_R8 (side front)
+  (image RES40_R1 (side front)
    (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
    (pin PS1 (rotate 270) 0 0.00000 0.00000)
    (pin PS1 (rotate 270) 1 10.16000 0.00000)
   )
-  (image RES40_R9 (side front)
+  (image RES40_R2 (side front)
    (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
-   (pin PS1 (rotate -90) 0 0.00000 0.00000)
-   (pin PS1 (rotate -90) 1 10.16000 0.00000)
+   (pin PS1 (rotate 270) 0 0.00000 0.00000)
+   (pin PS1 (rotate 270) 1 10.16000 0.00000)
   )
-  (image RES40_R10 (side front)
+  (image RES40_R3 (side front)
    (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
-   (pin PS1 (rotate 90) 0 0.00000 0.00000)
-   (pin PS1 (rotate 90) 1 10.16000 0.00000)
+   (pin PS1 (rotate 270) 0 0.00000 0.00000)
+   (pin PS1 (rotate 270) 1 10.16000 0.00000)
   )
-  (image RES40_R11 (side front)
-   (outline (rect TOP -0.88900 -0.88900 11.04900 0.88900))
-   (pin PS1 (rotate 180) 0 0.00000 0.00000)
-   (pin PS1 (rotate 180) 1 10.16000 0.00000)
+  (image "CONN-DIL8_J11" (side front)
+   (outline (rect TOP -1.37160 -1.37160 8.99160 3.91160))
+   (pin PS0 (rotate 0) 0 0.00000 0.00000)
+   (pin PS0 (rotate 0) 1 2.54000 0.00000)
+   (pin PS0 (rotate 0) 2 5.08000 0.00000)
+   (pin PS0 (rotate 0) 3 7.62000 0.00000)
+   (pin PS0 (rotate 0) 4 7.62000 2.54000)
+   (pin PS0 (rotate 0) 5 5.08000 2.54000)
+   (pin PS0 (rotate 0) 6 2.54000 2.54000)
+   (pin PS0 (rotate 0) 7 0.00000 2.54000)
   )
   (padstack PS0 (absolute on)
    (shape (rect TOP -1.01600 -1.01600 1.01600 1.01600))
@@ -291,51 +240,6 @@
   )
  )
  (network
-  (net "#00013"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins R4-1 R8-0)
-  )
-  (net "#00016"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins R7-1 R9-1)
-  )
-  (net "#00017"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins R5-1 R11-0)
-  )
-  (net "#00020"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins R6-1 R10-1)
-  )
-  (net "13"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins J1-14)
-  )
   (net "3V3"
    (circuit
     (use_layer BOT)
@@ -343,34 +247,7 @@
      $VIA#0_POWER
     )
    )
-   (pins J1-13)
-  )
-  (net "A2"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins J1-9)
-  )
-  (net "A3"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins J1-8)
-  )
-  (net "A4"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins J1-7)
+   (pins J1-13 J11-7)
   )
   (net "A5"
    (circuit
@@ -381,32 +258,14 @@
    )
    (pins J1-6)
   )
-  (net "A6"
+  (net "CE"
    (circuit
     (use_layer BOT)
     (use_via
      $VIA#0_SIGNAL
     )
    )
-   (pins J1-5)
-  )
-  (net "A7"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins J1-4)
-  )
-  (net "ATR"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins J6-6 J3-3)
+   (pins J1-9 J11-1)
   )
   (net "CEN"
    (circuit
@@ -415,7 +274,25 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins J6-1 R2-1 J4-1 J9-2)
+   (pins J6-1 J9-2 R2-1)
+  )
+  (net "CNS"
+   (circuit
+    (use_layer BOT)
+    (use_via
+     $VIA#0_SIGNAL
+    )
+   )
+   (pins J1-14 J11-6)
+  )
+  (net "CSN"
+   (circuit
+    (use_layer BOT)
+    (use_via
+     $VIA#0_SIGNAL
+    )
+   )
+   (pins J1-11)
   )
   (net "CTS"
    (circuit
@@ -426,6 +303,42 @@
    )
    (pins)
   )
+  (net "D6"
+   (circuit
+    (use_layer BOT)
+    (use_via
+     $VIA#0_SIGNAL
+    )
+   )
+   (pins J6-6)
+  )
+  (net "D7"
+   (circuit
+    (use_layer BOT)
+    (use_via
+     $VIA#0_SIGNAL
+    )
+   )
+   (pins J6-5)
+  )
+  (net "D8"
+   (circuit
+    (use_layer BOT)
+    (use_via
+     $VIA#0_SIGNAL
+    )
+   )
+   (pins J6-4)
+  )
+  (net "D9"
+   (circuit
+    (use_layer BOT)
+    (use_via
+     $VIA#0_SIGNAL
+    )
+   )
+   (pins J6-3)
+  )
   (net "DCD"
    (circuit
     (use_layer BOT)
@@ -434,24 +347,6 @@
     )
    )
    (pins)
-  )
-  (net "DEL"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins J6-3 J3-0 R8-1)
-  )
-  (net "DER"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins J6-5 J3-2 R9-0)
   )
   (net "DSR"
    (circuit
@@ -478,7 +373,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins J1-11 J2-5)
+   (pins J1-5 J2-5)
   )
   (net "ENB"
    (circuit
@@ -487,7 +382,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins J1-10 J2-0)
+   (pins J1-4 J2-0)
   )
   (net "GND"
    (circuit
@@ -496,7 +391,7 @@
      $VIA#0_POWER
     )
    )
-   (pins J1-1 J6-11 R4-0 R5-0 R6-0 R7-0 J5-0 J7-0 J8-1 J9-1 J10-1)
+   (pins J1-1 J6-11 J5-0 J7-1 J8-1 J9-1 J10-1 J11-0)
   )
   (net "IN1"
    (circuit
@@ -534,15 +429,6 @@
    )
    (pins J6-7 J2-1)
   )
-  (net "IZQ"
-   (circuit
-    (use_layer BOT)
-    (use_via
-     $VIA#0_SIGNAL
-    )
-   )
-   (pins J6-4 J3-1 R10-0)
-  )
   (net "LE"
    (circuit
     (use_layer BOT)
@@ -550,7 +436,25 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins J6-2 R3-1 J4-2 J10-2)
+   (pins J6-2 J10-2 R3-1)
+  )
+  (net "MISO"
+   (circuit
+    (use_layer BOT)
+    (use_via
+     $VIA#0_SIGNAL
+    )
+   )
+   (pins J1-7 J11-3)
+  )
+  (net "MOSI"
+   (circuit
+    (use_layer BOT)
+    (use_via
+     $VIA#0_SIGNAL
+    )
+   )
+   (pins J1-10 J11-5)
   )
   (net "REF"
    (circuit
@@ -568,7 +472,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins J6-0 R1-1 J4-0 J8-2)
+   (pins J6-0 J8-2 R1-1)
   )
   (net "RTS"
    (circuit
@@ -586,7 +490,16 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins J6-13 J7-3)
+   (pins J6-14 J7-3)
+  )
+  (net "SCK"
+   (circuit
+    (use_layer BOT)
+    (use_via
+     $VIA#0_SIGNAL
+    )
+   )
+   (pins J1-8 J11-2)
   )
   (net "TX"
    (circuit
@@ -595,7 +508,7 @@
      $VIA#0_SIGNAL
     )
    )
-   (pins J6-14 J7-2)
+   (pins J6-13 J7-2)
   )
   (net "VCC/VDD"
    (circuit
@@ -604,7 +517,7 @@
      $VIA#0_POWER
     )
    )
-   (pins J1-3 R1-0 R2-0 R3-0 J7-1 J8-0 J9-0 J10-0)
+   (pins J1-3 J7-0 J8-0 J9-0 J10-0 R1-0 R2-0 R3-0)
   )
   (net "VIN"
    (circuit
@@ -633,23 +546,17 @@
    )
   )
   (class SIGNAL
-   "#00013"
-   "#00016"
-   "#00017"
-   "#00020"
-   "13"
-   "A2"
-   "A3"
-   "A4"
    "A5"
-   "A6"
-   "A7"
-   "ATR"
+   "CE"
    "CEN"
+   "CNS"
+   "CSN"
    "CTS"
+   "D6"
+   "D7"
+   "D8"
+   "D9"
    "DCD"
-   "DEL"
-   "DER"
    "DSR"
    "DTR"
    "ENA"
@@ -658,12 +565,14 @@
    "IN2"
    "IN3"
    "IN4"
-   "IZQ"
    "LE"
+   "MISO"
+   "MOSI"
    "REF"
    "RI"
    "RTS"
    "RX"
+   "SCK"
    "TX"
    "{NC}"
    "{VOID}"
