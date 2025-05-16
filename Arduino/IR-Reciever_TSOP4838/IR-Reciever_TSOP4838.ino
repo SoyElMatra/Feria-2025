@@ -7,7 +7,6 @@ bool previousIRState = HIGH;
 void setup() {
   pinMode(irReceiverPin, INPUT_PULLUP);
   Serial.begin(9600);
-  Serial.println("IR Receiver Test");
 }
 
 void loop() {
