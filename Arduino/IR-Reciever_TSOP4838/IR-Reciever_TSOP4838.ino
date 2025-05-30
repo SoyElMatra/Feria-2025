@@ -1,28 +1,48 @@
-const int irReceiverPin = 4;  // Pin connected to the TSOP4838 output
-unsigned long lastIRStateChange = 0;
-unsigned long currentMillis = 0;
-bool currentIRState = HIGH;
-bool previousIRState = HIGH;
+const int TIMEOUT = 75;
+const int SENSOR_COUNT = 3;
+
+struct Sensor {
+  const char* name;
+  unsigned int pin;
+  bool lastState;
+  bool signalPresent;
+  unsigned long lastChangeTime;
+};
+
+Sensor sensors[SENSOR_COUNT] = {
+  {"Izquierda", 7, HIGH, false, 0},
+  {"Centro",    8, HIGH, false, 0},
+  {"Derecha",   9, HIGH, false, 0}
+};
 
 void setup() {
-  pinMode(irReceiverPin, INPUT_PULLUP);
   Serial.begin(9600);
+  for (int i = 0; i < SENSOR_COUNT; i++) {
+    pinMode(sensors[i].pin, INPUT);
+    sensors[i].lastState = digitalRead(sensors[i].pin);
+  }
 }
 
 void loop() {
-  currentMillis = millis();
-  currentIRState = digitalRead(irReceiverPin);
-
-  // Check for state change
-  if (currentIRState != previousIRState) {
-    lastIRStateChange = currentMillis;
-    Serial.println("IR State Changed!");
-    Serial.print("Current State: ");
-    Serial.println(currentIRState ? "HIGH" : "LOW");
+  unsigned long currentTime = millis();
+  
+  for (int i = 0; i < SENSOR_COUNT; i++) {
+    Sensor &s = sensors[i];
+    bool currentState = digitalRead(s.pin);
+    
+    if (currentState != s.lastState) {
+      s.lastChangeTime = currentTime;
+      s.lastState = currentState;
+    }
+    
+    bool newState = (currentTime - s.lastChangeTime) <= TIMEOUT;
+    
+    if (newState != s.signalPresent) {
+      s.signalPresent = newState;
+      
+      Serial.print(s.name);
+      Serial.print(": ");
+      Serial.println(s.signalPresent ? "1" : "0");
+    }
   }
-
-  previousIRState = currentIRState;
-
-  // Update every 100 milliseconds
-  delay(100);
 }
