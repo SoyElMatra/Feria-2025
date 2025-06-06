@@ -124,6 +124,7 @@ void checkPos() {
     if (newState != s.signalPresent) {
       s.signalPresent = newState;
       if (s.signalPresent == 1) {
+        Serial.println(s.name);
         switch (s.name) {
           case 'l':
             le = 1;
@@ -158,15 +159,12 @@ void checkPos() {
 
 
 void forward(int st, int vel) {
-  Serial.print("ADELANTE");
+  Serial.println("ADELANTE");
   //Direccion motor A
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN1, LOW);
-  analogWrite(ENA, vel);  //Velocidad motor A
-  //Direccion motor B
-  digitalWrite(IN4, HIGH);
-  digitalWrite(IN3, LOW);
-  analogWrite(ENB, vel);  //Velocidad motor B
+  analogWrite(IN2, vel);
+  digitalWrite(IN1, 0);
+  analogWrite(IN4, vel);
+  digitalWrite(IN3, 0);
   delay(st);
   Parar();
 }
@@ -174,15 +172,12 @@ void forward(int st, int vel) {
 
 
 void right(int st, int vel) {
-  Serial.print("DERECHA");
+  Serial.println("DERECHA");
   //Direccion motor A
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN1, HIGH);
-  analogWrite(ENA, vel);  //Velocidad motor A
-  //Direccion motor B
-  digitalWrite(IN4, HIGH);
-  digitalWrite(IN3, LOW);
-  analogWrite(ENB, vel);  //Velocidad motor A
+  analogWrite(IN1, vel);
+  digitalWrite(IN2, 0);
+  analogWrite(IN4, vel);
+  digitalWrite(IN3, 0);
   delay(st);
   Parar();
 }
@@ -190,15 +185,11 @@ void right(int st, int vel) {
 
 
 void left(int st, int vel) {
-  Serial.print("IZQUIERDA");
-  //Direccion motor A
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
-  analogWrite(ENA, vel);  //Velocidad motor A
-  //Direccion motor B
-  digitalWrite(IN3, HIGH);
-  digitalWrite(IN4, LOW);
-  analogWrite(ENB, vel);  //Velocidad motor A
+  Serial.println("IZQUIERDA");
+  analogWrite(IN2, vel);
+  digitalWrite(IN1, 0);
+  analogWrite(IN3, vel);
+  digitalWrite(IN4, 0);
   delay(st);
   Parar();
 }
@@ -206,14 +197,16 @@ void left(int st, int vel) {
 
 
 void Parar() {
-  analogWrite(ENA, 0);
-  analogWrite(ENB, 0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
 }
 
 
 
 void Return(int st) {
-  Serial.print("ATRAS");
+  Serial.println("ATRAS");
   while (bw == 1 or (cen)) {
     if (ri == 1) {
       right(st, 255);
