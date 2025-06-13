@@ -1,15 +1,8 @@
-//sensores ubicacion pacman
-#define adelante 9
-#define izquierda 8
-#define derecha 7
-
 // Motor A Derecba
-#define ENA A6
 #define IN1 2
 #define IN2 3
 
 // Motor B Izquierda
-#define ENB A7
 #define IN3 4
 #define IN4 5
 
@@ -35,6 +28,8 @@ struct Sensor {
   unsigned long lastChangeTime;
 };
 
+bool check;
+
 Sensor sensors[SENSOR_COUNT] = {
   { 'l', 7, HIGH, false, 0 },
   { 'm', 8, HIGH, false, 0 },
@@ -54,8 +49,6 @@ void setup() {
   // Se activa el monitor serie para mostrar información posteriormente
   Serial.begin(9600);
   // Definimos todos los pines de los motores como salida
-  pinMode(ENA, OUTPUT);
-  pinMode(ENB, OUTPUT);
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
@@ -159,54 +152,62 @@ void checkPos() {
 
 
 void forward(int st, int vel) {
-  Serial.println("ADELANTE");
-  //Direccion motor A
+  if (check == 1) {
+    check = 0;
+    Serial.println("ADELANTE");
+  }
   analogWrite(IN2, vel);
   digitalWrite(IN1, 0);
   analogWrite(IN4, vel);
   digitalWrite(IN3, 0);
   delay(st);
-  Parar();
 }
 
 
 
 void right(int st, int vel) {
-  Serial.println("DERECHA");
-  //Direccion motor A
+  if (check == 1) {
+    check = 0;
+    Serial.println("DERECHA");
+  }
   analogWrite(IN1, vel);
   digitalWrite(IN2, 0);
   analogWrite(IN4, vel);
   digitalWrite(IN3, 0);
   delay(st);
-  Parar();
 }
 
 
 
 void left(int st, int vel) {
-  Serial.println("IZQUIERDA");
+  if (check == 1) {
+    check = 0;
+    Serial.println("IZQUIERDA");
+  }
   analogWrite(IN2, vel);
   digitalWrite(IN1, 0);
   analogWrite(IN3, vel);
   digitalWrite(IN4, 0);
   delay(st);
-  Parar();
 }
 
 
 
 void Parar() {
-  digitalWrite(IN1, LOW);
-  digitalWrite(IN2, LOW);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, LOW);
+  check = 1;
+  digitalWrite(IN2, 0);
+  digitalWrite(IN1, 0);
+  digitalWrite(IN3, 0);
+  digitalWrite(IN4, 0);
 }
 
 
 
 void Return(int st) {
-  Serial.println("ATRAS");
+  if (check == 1) {
+    check = 0;
+    Serial.println("ATRAS");
+  }
   while (bw == 1 or (cen)) {
     if (ri == 1) {
       right(st, 255);
@@ -216,31 +217,4 @@ void Return(int st) {
       right(st, 255);
     }
   }
-  Parar();
 }
-
-/*if(izq == 0 &amp;&amp; der == 0)
-  {
-    robotParar(); // El robot para
- 
-  }
-  // Si el izquierdo retorna 0 (zona blanca) y el derecho 1 (negra) el robot gira derecha
-  if (izq == 0 &amp;&amp; der == 1)
-  {
-    robotDerecha();
-     // El robot gira a la derecha
- 
-  }
-  // Si el izquierdo retorna 1 (zona negra) y el derecho 0 (blanca) el robot gira izquierda
-  if (izq == 1 &amp;&amp; der == 0)
-  {
-   robotIzquierda();
- 
-  }
-  // Si ambos sensores retornan 0 (zona negra) el robot sigue recto
-  if (izq == 1 &amp;&amp; der == 1)
-  {
-    robotAvance(); // El robot avanza
-    Serial.println("robot avanza");
-  }
-*/
