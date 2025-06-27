@@ -55,7 +55,7 @@ void setup() {
   pinMode(IN4, OUTPUT);
 
   for (int i = 0; i < SENSOR_COUNT; i++) {
-    pinMode(sensors[i].pin, INPUT);
+    pinMode(sensors[i].pin, INPUT_PULLUP);
     sensors[i].lastState = digitalRead(sensors[i].pin);
   }
 }
@@ -74,9 +74,7 @@ void loop() {
   }
   // Sigue un algoritmo para ver que hace dependiendo de la direccion del pacman
   else if (fw == 1 or ri == 1 or le == 1) {
-    if ((!der) and (!cen) and (!izq)) {
-      Parar();
-    } else if ((!izq) and (cen) and (der)) {
+    if ((!izq) and (cen) and (der)) {
       left(stpsuave, velman);
     } else if ((!izq) and (!cen) and (der)) {
       left(stpsuave, velman);
@@ -86,7 +84,7 @@ void loop() {
       right(stpsuave, velman);
     } else if ((izq) and (cen) and (!der)) {
       right(stpsuave, velman);
-    } else if ((!izq) and (cen) and (!der)) {
+    } else if (((!izq) and (cen) and (!der)) and ((!izq) and (!cen) and (!der))) {
       if (ri == 1) {
         right(stpsuave, velman);
       } else if (le == 1) {
@@ -102,18 +100,15 @@ void checkPos() {
   unsigned long currentTime = millis();
 
   for (int i = 0; i < SENSOR_COUNT; i++) {
-    Sensor& s = sensors[i];  // Hice un alias para no complicarme tanto la vida
+    Sensor& s = sensors[i];
     bool currentState = digitalRead(s.pin);
 
-    // Se fija si hubo cambio de estado o no
     if (currentState != s.lastState) {
       s.lastChangeTime = currentTime;
       s.lastState = currentState;
     }
-    // se fija si recibio algo antes de terminar el TimeOut
     bool newState = (currentTime - s.lastChangeTime) <= TIMEOUT;
 
-    // se fija si sigue leyendo la señal o si no
     if (newState != s.signalPresent) {
       s.signalPresent = newState;
       if (s.signalPresent == 1) {
