@@ -1,16 +1,15 @@
 // Motor A Derecba
-int ENA = 9;
-int IN1 = 5;
-int IN2 = 6;
+int IN1 = A3;
+int IN2 = A4;
 
 // Motor B Izquierda
-int ENB = 10;
-int IN3 = 7;
-int IN4 = 8;
 
-int izq = 0;
-int der = 0;
-int cen = 0;
+int IN3 = A5;
+int IN4 = A2;
+
+bool izq = 0;
+bool der = 0;
+bool cen = 0;
 
 int velade = 190;
 int velman = 100
@@ -31,8 +30,6 @@ void setup() {
   // Se activa el monitor serie para mostrar información posteriormente
   Serial.begin(9600);
   // Definimos todos los pines de los motores como salida
-  pinMode (ENA, OUTPUT);
-  pinMode (ENB, OUTPUT);
   pinMode (IN1, OUTPUT);
   pinMode (IN2, OUTPUT);
   pinMode (IN3, OUTPUT);
@@ -42,9 +39,9 @@ void setup() {
 
 void loop() {
   // Se lee la información ofrecida por el sensor
-  izq = digitalRead(SensorLeft);
-  der = digitalRead(SensorRight);
-  cen = digitalRead(SensorMiddle);
+  izq = !digitalRead(SensorLeft);
+  der = !digitalRead(SensorRight);
+  cen = !digitalRead(SensorMiddle);
 
   if ((!der) and (!cen) and (!izq)) {
     Parar();
@@ -72,11 +69,9 @@ void Adelante(int st, int vel) {
   //Direccion motor A
   digitalWrite (IN2, HIGH);
   digitalWrite (IN1, LOW);
-  analogWrite (ENA, vel); //Velocidad motor A
   //Direccion motor B
   digitalWrite (IN4, HIGH);
   digitalWrite (IN3, LOW);
-  analogWrite (ENB, vel); //Velocidad motor B
   delay (st);
   Parar();
 
@@ -87,11 +82,9 @@ void Atras (int st, int vel) // Mueve para atrás
   //Direccion motor A
   digitalWrite (IN1, HIGH);
   digitalWrite (IN2, LOW);
-  analogWrite (ENA, vel); //Velocidad motor A
   //Direccion motor B
   digitalWrite (IN3, HIGH);
   digitalWrite (IN4, LOW);
-  analogWrite (ENB, vel); //Velocidad motor B
   delay (st);
   Parar();
 }
@@ -102,11 +95,9 @@ void Derecha (int st, int vel)
   //Direccion motor A
   digitalWrite (IN2, LOW);
   digitalWrite (IN1, HIGH);
-  analogWrite (ENA, vel); //Velocidad motor A
   //Direccion motor B
   digitalWrite (IN4, HIGH);
   digitalWrite (IN3, LOW);
-  analogWrite (ENB, vel); //Velocidad motor A
   delay (st);
   Parar();
 
@@ -116,22 +107,24 @@ void Izquierda (int st, int vel)
   //Direccion motor A
   digitalWrite (IN1, HIGH);
   digitalWrite (IN2, HIGH);
-  analogWrite (ENA, vel); //Velocidad motor A
   //Direccion motor B
   digitalWrite (IN3, HIGH);
   digitalWrite (IN4, LOW);
-  analogWrite (ENB, vel); //Velocidad motor A
   delay (st);
   Parar();
 
 }
 
 void Parar() {
-  analogWrite(ENA, 0);
-  analogWrite(ENB, 0);
+ //Direccion motor A
+  digitalWrite (IN1, LOW);
+  digitalWrite (IN2, LOW);
+  //Direccion motor B
+  digitalWrite (IN3, LOW);
+  digitalWrite (IN4, LOW);
 }
   // Si el resultado de ambos sensores es 0 (zona blanca) el robot sigue se para
-  if(izq == 0 &amp;&amp; der == 0)
+  /*if(izq == 0 &amp;&amp; der == 0)
   {
     robotParar(); // El robot para
  
@@ -155,3 +148,4 @@ void Parar() {
     robotAvance(); // El robot avanza
     Serial.println("robot avanza");
   }
+*/

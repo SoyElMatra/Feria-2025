@@ -10,9 +10,9 @@ struct Sensor {
 };
 
 Sensor sensors[SENSOR_COUNT] = {
-  {"Izquierda", 7, HIGH, false, 0},
-  {"Centro",    8, HIGH, false, 0},
-  {"Derecha",   9, HIGH, false, 0}
+  {"Izquierda", 9, HIGH, false, 0},
+  {"Centro",    7, HIGH, false, 0},
+  {"Derecha",   8, HIGH, false, 0}
 };
 
 void setup() {

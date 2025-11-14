@@ -1,10 +1,14 @@
-// Motor A Derecba
+// Motor A Derecha
 #define IN1 A3
 #define IN2 A4
-
-// Motor B Izquierda
+// Motor B Izquierda  
 #define IN3 A2
 #define IN4 A5
+
+// Definiciones consistentes de sensores - USAR ESTOS PINES
+#define SensorLeft 9
+#define SensorMiddle 7
+#define SensorRight 8
 
 int izq = 0;
 int der = 0;
@@ -16,86 +20,118 @@ int stp = 50;
 int stpsuave = 10;
 
 bool bw, le, ri, fw;
-
 const int TIMEOUT = 75;
 const int SENSOR_COUNT = 3;
 
 struct Sensor {
-  char name;                    // id del sensor
-  unsigned int pin;             // pin del sensor
-  bool lastState;               // ultimo estado del sensor
-  bool signalPresent;           // presencia de la señal
-  unsigned long lastChangeTime; // tiempo de cambio de señal del sensor
+  char name;
+  unsigned int pin;
+  bool lastState;
+  bool signalPresent;
+  unsigned long lastChangeTime;
 };
 
-int lstat = 0; //esta variable te dice cual fue el ultimo sensor que se activo en caso de que el pacman este atras del fantasma
-
-// Estos sensores funcionan asi. cuando reciben la señal a 38khz, mandan una señal oscilante. este struct esta hecho para leer las oscilaciones de cada sensor y decidir
-// si el sensor esta recibiendo la señal o no, o sea, transformar las oscilaciones en un 1 o un 0 dependiendo de si las recibe o no.
-
-bool check;
+int lstat = 0;
 
 Sensor sensors[SENSOR_COUNT] = {
-  { 'l', 9, HIGH, false, 0 },
-  { 'm', 7, HIGH, false, 0 },
-  { 'r', 8, HIGH, false, 0 }
+  { 'l', SensorLeft, HIGH, false, 0 },
+  { 'm', SensorMiddle, HIGH, false, 0 },
+  { 'r', SensorRight, HIGH, false, 0 }
 };
-// estas son las definiciones del struct para cada sensor
-
-// Guardar el número de pin de Arduino al que está conectado el pin OUT del sensor
-#define SensorLeft 12    // input pin of left sensor
-#define SensorMiddle 11  // input pin of middle sensor
-#define SensorRight 10   // input pin of right sensor
 
 void setup() {
-  // Se indica que ese pin va a utilizarse para recibir información
+  // Configurar sensores de línea
   pinMode(SensorLeft, INPUT);
   pinMode(SensorMiddle, INPUT);
   pinMode(SensorRight, INPUT);
-  // Se activa el monitor serie para mostrar información posteriormente
+  
   Serial.begin(9600);
-  // Definimos todos los pines de los motores como salida
+  
+  // Configurar pines de motor
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
 
+  // Inicializar sensores IR
   for (int i = 0; i < SENSOR_COUNT; i++) {
     pinMode(sensors[i].pin, INPUT_PULLUP);
     sensors[i].lastState = digitalRead(sensors[i].pin);
   }
+  
+  Serial.println("=== SISTEMA INICIALIZADO ===");
+  Serial.println("Testeando sensores de linea (1=linea negra, 0=fuera de linea):");
+  delay(2000);
 }
 
-
-
 void loop() {
-  // Se lee la información ofrecida por el sensor
-  izq = digitalRead(SensorLeft);
-  der = digitalRead(SensorRight);
-  cen = digitalRead(SensorMiddle);
+  // *** CAMBIO PRINCIPAL: LECTURAS INVERTIDAS ***
+  // Ahora 1 = sensor sobre línea negra, 0 = fuera de línea
+  izq = !digitalRead(SensorLeft);
+  der = !digitalRead(SensorRight);
+  cen = !digitalRead(SensorMiddle);
+  
   checkPos();
-  // Se fija si el pacman esta atras suyo para volver
-  // Sigue un algoritmo para ver que hace dependiendo de la direccion del pacman
-  if (fw == 1 or ri == 1 or le == 1) {
-    if ((!izq) and (cen) and (der)) {
+
+  // DEBUG: Mostrar valores de sensores
+  Serial.print("LINEA - I:");
+  Serial.print(izq);
+  Serial.print(" C:"); 
+  Serial.print(cen);
+  Serial.print(" D:");
+  Serial.print(der);
+  Serial.print(" | IR - le:");
+  Serial.print(le);
+  Serial.print(" fw:");
+  Serial.print(fw);
+  Serial.print(" ri:");
+  Serial.println(ri);
+
+  // *** LÓGICA DE SEGUIMIENTO DE LÍNEA CORREGIDA ***
+  if (fw == 1 || ri == 1 || le == 1) {
+    // Caso 1: Solo sensor izquierdo en línea
+    if ((izq) && (!cen) && (!der)) {
       left(stpsuave, velman);
-    } else if ((!izq) and (!cen) and (der)) {
+    } 
+    // Caso 2: Izquierda y centro en línea
+    else if ((izq) && (cen) && (!der)) {
       left(stpsuave, velman);
-    } else if ((izq) and (!cen) and (der)) {
+    } 
+    // Caso 3: Solo centro en línea → AVANZAR
+    else if ((!izq) && (cen) && (!der)) {
       forward(stp, velade);
-    } else if ((izq) and (!cen) and (!der)) {
+    } 
+    // Caso 4: Solo derecha en línea
+    else if ((!izq) && (!cen) && (der)) {
       right(stpsuave, velman);
-    } else if ((izq) and (cen) and (!der)) {
+    } 
+    // Caso 5: Centro y derecha en línea
+    else if ((!izq) && (cen) && (der)) {
       right(stpsuave, velman);
-    } else if (((!izq) and (cen) and (!der)) and ((!izq) and (!cen) and (!der))) {
-      if (ri == 1 or (lstat == 1 and bw == 1)) {
+    } 
+    // *** CAMBIO: Condición corregida con OR (||) en lugar de AND (&&) ***
+    // Caso 6: Izquierda y derecha en línea O todos fuera de línea
+    else if (((izq) && (!cen) && (der)) || ((!izq) && (!cen) && (!der))) {
+      if (ri == 1 || (lstat == 1 && bw == 1)) {
         right(stpsuave, velman);
-      } else if (le == 1 or (lstat == 2 and bw == 1)) {
+      } else if (le == 1 || (lstat == 2 && bw == 1)) {
         left(stpsuave, velman);
+      } else {
+        // Por defecto girar derecha
+        right(stpsuave, velman);
       }
-    } else if ((izq) and (cen) and (der)) {
+    } 
+    // Caso 7: Todos los sensores en línea
+    else if ((izq) && (cen) && (der)) {
       Parar();
     }
+    // Caso 8: Ninguno de los casos anteriores
+    else {
+      Parar();
+    }
+  } else {
+    // Si no hay señal de los sensores IR, parar
+    Parar();
   }
 }
 
@@ -115,6 +151,7 @@ void checkPos() {
     if (newState != s.signalPresent) {
       s.signalPresent = newState;
       if (s.signalPresent == 1) {
+        Serial.print("SENSOR IR ACTIVO: ");
         Serial.println(s.name);
         switch (s.name) {
           case 'l':
@@ -122,21 +159,21 @@ void checkPos() {
             ri = 0;
             fw = 0;
             bw = 0;
-            lstat = 2; // en este caso, 2 significa izquierda
+            lstat = 2; // 2 = izquierda
             break;
           case 'm':
             fw = 1;
             ri = 0;
             le = 0;
             bw = 0;
-            lstat = 0; // 0 significa adelante
+            lstat = 0; // 0 = adelante
             break;
           case 'r':
             ri = 1;
             le = 0;
             fw = 0;
             bw = 0;
-            lstat = 1; // y 1 significa derecha
+            lstat = 1; // 1 = derecha
             break;
           default:
             ri = 0;
@@ -147,6 +184,7 @@ void checkPos() {
         }
       }
       if (!s.signalPresent) {
+        Serial.print("SENSOR IR INACTIVO: ");
         Serial.println(s.name);
         switch (s.name) {
           case 'l':
@@ -163,8 +201,6 @@ void checkPos() {
     }
   }
 }
-
-
 
 void forward(int st, int vel) {
   analogWrite(IN2, vel);
@@ -196,21 +232,3 @@ void Parar() {
   digitalWrite(IN3, 0);
   digitalWrite(IN4, 0);
 }
-
-
-
-/*void Return(int st) {
-  if (check == 1) {
-    check = 0;
-    Serial.println("ATRAS");
-  }
-  while (bw == 1 or (cen)) {
-    if (ri == 1) {
-      right(st, 255);
-    } else if (le == 1) {
-      left(st, 255);
-    } else {
-      right(st, 255);
-    }
-  }
-}*/

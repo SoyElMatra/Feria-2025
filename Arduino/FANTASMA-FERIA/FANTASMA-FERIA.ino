@@ -1,182 +1,125 @@
-//sensores ubicacion pacman
-#define adelante A0
-#define izquierda A1
-#define derecha A2
-#define atras A3
+// =======================
+// Pines del Arduino
+// =======================
 
-// Motor A Derecba
-#define ENA 2
-#define IN1 3
-#define IN2 4
+// Motor derecho
+#define IN1 A3
+#define IN2 A4
 
-// Motor B Izquierda
-#define ENB 5
-#define IN3 6
-#define IN4 7
+// Motor izquierdo
+#define IN3 A5
+#define IN4 A2
 
-int fw;
-int bw;
-int ri;
-int le;
+// Sensores de línea
+#define SensorLeft    12
+#define SensorMiddle  11
+#define SensorRight   10
 
-int izq = 0;
-int der = 0;
-int cen = 0;
+// =======================
+// Variables
+// =======================
+bool izq = false;
+bool cen = false;
+bool der = false;
 
-int velade = 190;
-int velman = 100;
-int stp = 50;
-int stpsuave = 10;
+int velade = 190;    // Velocidad de avance (no se usa digital ON/OFF, queda para compatibilidad)
+int velman = 100;    // Velocidad de giro
+int stp = 50;       // tiempo que dura la accion
+int stpsuave = 10;  // en caso de estar medio complicado con alguna curva
 
-// Guardar el número de pin de Arduino al que está conectado el pin OUT del sensor
-#define SensorLeft 8    // input pin of left sensor
-#define SensorMiddle 9  // input pin of middle sensor
-#define SensorRight 10  // input pin of right sensor
-
+// =======================
+// Setup
+// =======================
 void setup() {
-  // Se indica que ese pin va a utilizarse para recibir información
-  pinMode(SensorLeft, INPUT);
-  pinMode(SensorMiddle, INPUT);
-  pinMode(SensorRight, INPUT);
-  // Se activa el monitor serie para mostrar información posteriormente
   Serial.begin(9600);
-  // Definimos todos los pines de los motores como salida
-  pinMode(ENA, OUTPUT);
-  pinMode(ENB, OUTPUT);
+
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
+
+  pinMode(SensorLeft, INPUT);
+  pinMode(SensorMiddle, INPUT);
+  pinMode(SensorRight, INPUT);
+
+  Parar();
 }
 
-
-
+// =======================
+// Loop
+// =======================
 void loop() {
-  // Se lee la información ofrecida por el sensor
+  // Leer sensores (invertimos porque el sensor LOW = línea negra)
   izq = digitalRead(SensorLeft);
-  der = digitalRead(SensorRight);
   cen = digitalRead(SensorMiddle);
-  fw = digitalRead(adelante);
-  bw = digitalRead(atras);
-  ri = digitalRead(derecha);
-  le = digitalRead(izquierda);
-  if(bw == 1){
-    Return(stpsuave);
-  }
-  else if (fw == 1 or ri == 1 or le == 1) {
-    if ((!der) and (!cen) and (!izq)) {
-      Parar();
-    } else if ((!izq) and (cen) and (der)) {
-      left(stpsuave, velman);
-    } else if ((!izq) and (!cen) and (der)) {
-      left(stpsuave, velman);
-    } else if ((izq) and (!cen) and (der)) {
-      forward(stp, velade);
-    } else if ((izq) and (!cen) and (!der)) {
-      right(stpsuave, velman);
-    } else if ((izq) and (cen) and (!der)) {
-      right(stpsuave, velman);
-    } else if ((!izq) and (cen) and (!der)) {
-      if (ri == 1) {
-        right(stpsuave, velman);
-      } else if (le == 1) {
-        left(stpsuave, velman);
-      }
-    } else if ((izq) and (cen) and (der)) {
-      Parar();
-    }
+  der = digitalRead(SensorRight);
+
+  // Lógica de seguimiento de línea
+  if (izq && cen && der) {
+    Parar(); // Ningún sensor sobre línea
+  } 
+  else if (izq && !cen && !der) {
+    Izquierda(stpsuave); // Solo derecha y centro sobre línea
+  } 
+  else if (izq && cen && !der) {
+    Izquierda(stpsuave); // Solo derecha sobre línea
+  } 
+  else if (!izq && cen && !der) {
+    Adelante(stp); // Izquierda y derecha sobre línea, centro perdido
+  } 
+  else if (!izq && cen && der) {
+    Derecha(stpsuave); // Solo izquierda sobre línea
+  } 
+  else if (!izq && !cen && der) {
+    Derecha(stpsuave); // Izquierda y centro sobre línea
+  } 
+  else if (!izq && !cen && !der) {
+    Parar(); // Línea detectada en todos
   }
 }
 
-
-
-void forward(int st, int vel) {
-  //Direccion motor A
-  digitalWrite(IN2, HIGH);
-  digitalWrite(IN1, LOW);
-  analogWrite(ENA, vel);  //Velocidad motor A
-  //Direccion motor B
-  digitalWrite(IN4, HIGH);
-  digitalWrite(IN3, LOW);
-  analogWrite(ENB, vel);  //Velocidad motor B
-  delay(st);
-  Parar();
-}
-
-
-
-void right(int st, int vel) {
-  //Direccion motor A
+// =======================
+// Funciones de movimiento
+// =======================
+void Adelante(int st) {
+  digitalWrite(IN1, HIGH);  // Motor derecho adelante
   digitalWrite(IN2, LOW);
-  digitalWrite(IN1, HIGH);
-  analogWrite(ENA, vel);  //Velocidad motor A
-  //Direccion motor B
-  digitalWrite(IN4, HIGH);
-  digitalWrite(IN3, LOW);
-  analogWrite(ENB, vel);  //Velocidad motor A
-  delay(st);
-  Parar();
-}
-
-
-
-void left(int st, int vel) {
-  //Direccion motor A
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, HIGH);
-  analogWrite(ENA, vel);  //Velocidad motor A
-  //Direccion motor B
-  digitalWrite(IN3, HIGH);
+  digitalWrite(IN3, HIGH);  // Motor izquierdo adelante
   digitalWrite(IN4, LOW);
-  analogWrite(ENB, vel);  //Velocidad motor A
   delay(st);
   Parar();
 }
 
+void Atras(int st) {
+  digitalWrite(IN1, LOW);   // Motor derecho atrás
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, LOW);   // Motor izquierdo atrás
+  digitalWrite(IN4, HIGH);
+  delay(st);
+  Parar();
+}
 
+void Derecha(int st) {
+  digitalWrite(IN1, HIGH);  // Motor derecho adelante
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);   // Motor izquierdo atrás
+  digitalWrite(IN4, HIGH);
+  delay(st);
+  Parar();
+}
+
+void Izquierda(int st) {
+  digitalWrite(IN1, LOW);   // Motor derecho atrás
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);  // Motor izquierdo adelante
+  digitalWrite(IN4, LOW);
+  delay(st);
+  Parar();
+}
 
 void Parar() {
-  analogWrite(ENA, 0);
-  analogWrite(ENB, 0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
 }
-
-
-
-void Return(int st) {
-  while (bw == 1 or (cen)) {
-    if (ri == 1) {
-      right(st, 255);
-    } else if (le == 1) {
-      left(st, 255);
-    } else {
-      right(st, 255);
-    }
-  }
-  Parar();
-}
-
-/*if(izq == 0 &amp;&amp; der == 0)
-  {
-    robotParar(); // El robot para
- 
-  }
-  // Si el izquierdo retorna 0 (zona blanca) y el derecho 1 (negra) el robot gira derecha
-  if (izq == 0 &amp;&amp; der == 1)
-  {
-    robotDerecha();
-     // El robot gira a la derecha
- 
-  }
-  // Si el izquierdo retorna 1 (zona negra) y el derecho 0 (blanca) el robot gira izquierda
-  if (izq == 1 &amp;&amp; der == 0)
-  {
-   robotIzquierda();
- 
-  }
-  // Si ambos sensores retornan 0 (zona negra) el robot sigue recto
-  if (izq == 1 &amp;&amp; der == 1)
-  {
-    robotAvance(); // El robot avanza
-    Serial.println("robot avanza");
-  }
-*/

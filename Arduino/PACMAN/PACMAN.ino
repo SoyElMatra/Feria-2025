@@ -1,23 +1,23 @@
-
 bool checkeacion;
 
 //Fin y reinicio del juego
 #define over 6
 #define restart 7
 
-// Motor A Derecba
-#define ENA A0
-#define IN1 2
-#define IN2 3
+// Motor A Derecha
+#define ENA A6
+#define IN1 A3
+#define IN2 A4
 
 // Motor B Izquierda
-#define ENB A1
-#define IN3 4
-#define IN4 5
+#define ENB A7
+#define IN3 A5
+#define IN4 A2
 
 int vel = 255;
-int stp = 150;
+int stp = 255;
 int a;
+char currentCommand = 'S'; // Variable para guardar el comando actual
 
 void setup() {
   Serial.begin(9600);
@@ -30,20 +30,26 @@ void setup() {
   pinMode(IN4, OUTPUT);
   pinMode(over, INPUT);
   pinMode(restart, INPUT);
+  Parar(); // Iniciar con motores detenidos
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  // Motor gira en un sentido
-  //a = sr04.Distance();
-  //Serial.print(a);
-  //Serial.println("cm");
-  if (Serial.available())
-    switch (Serial.read()) {
+  // Leer comandos del serial
+  if (Serial.available()) {
+    char command = Serial.read();
+    
+    // Limpiar el buffer serial de caracteres extra
+    while(Serial.available()) {
+      Serial.read(); // Descarta los caracteres restantes
+    }
+    
+    Serial.print("Comando recibido: ");
+    Serial.println(command);
+  
+    // Ejecutar el comando actual continuamente
+    switch (command) {
       case 'F':
-        //if (a > 5) {
-        //  Adelante();
-        //}
+        Serial.print("entre F");
         Adelante();
         break;
       case 'B':
@@ -55,65 +61,56 @@ void loop() {
       case 'L':
         Izquierda();
         break;
-      case 'S':
+      case '0':
         Parar();
         break;
-    } 
-  delay(stp);
-  Parar();
-  /*checkeacion = digitalRead(over);
-  if (checkeacion == 0) {
-    checkeacion = digitalRead(restart);
-    while (checkeacion == 1) {
-      checkeacion = digitalRead(restart);
-      Parar();
     }
-    Serial.println("Reinicio");
-  }*/
+  }
+  delay(50); // Pequeña pausa para estabilidad
 }
 
 void Atras() {
   //Direccion motor A
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  analogWrite(ENA, vel);  //Velocidad motor A
+  analogWrite(ENA, vel);
   //Direccion motor B
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-  analogWrite(ENB, vel);  //Velocidad motor B
+  analogWrite(ENB, vel);
 }
 
 void Adelante() {
   //Direccion motor A
-  digitalWrite(IN2, HIGH);
   digitalWrite(IN1, LOW);
-  analogWrite(ENA, vel);  //Velocidad motor A
+  digitalWrite(IN2, HIGH);
+  analogWrite(ENA, vel);
   //Direccion motor B
-  digitalWrite(IN4, HIGH);
   digitalWrite(IN3, LOW);
-  analogWrite(ENB, vel);  //Velocidad motor B
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, vel);
 }
 
 void Derecha() {
-  //Direccion motor A
-  digitalWrite(IN2, LOW);
+  // Motor A gira atrás
   digitalWrite(IN1, HIGH);
-  analogWrite(ENA, vel);  //Velocidad motor A
-  //Direccion motor B
-  digitalWrite(IN4, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENA, vel);
+  // Motor B gira adelante
   digitalWrite(IN3, LOW);
-  analogWrite(ENB, vel);  //Velocidad motor A
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENB, vel);
 }
 
 void Izquierda() {
-  //Direccion motor A
+  // Motor A gira adelante
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENA, vel);  //Velocidad motor A
-  //Direccion motor B
+  analogWrite(ENA, vel);
+  // Motor B gira atrás
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
-  analogWrite(ENB, vel);  //Velocidad motor A
+  analogWrite(ENB, vel);
 }
 
 void Parar() {

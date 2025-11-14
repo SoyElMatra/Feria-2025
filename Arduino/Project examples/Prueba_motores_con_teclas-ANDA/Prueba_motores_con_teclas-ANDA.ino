@@ -1,13 +1,11 @@
 #include <Servo.h>
 #include "SR04.h"
 // Motor A Derecba
-int ENA = 5;
 int IN1 = 2;
 int IN2 = 4;
 
 
 // Motor B Izquierda
-int ENB = 10;
 int IN3 = 7;
 int IN4 = 8;
 
