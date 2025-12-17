@@ -1,50 +1,12 @@
-# Writing all output to: C:\Users\Electronica\Documents\Feria-2025\Dise??o feria\Placas\Fantasma - placa.log
+# Writing all output to: Z:\6 Electronica\Martin\6to A??o\Feria-2025\Dise??o feria\Placas\Fantasma - placa.log
 set pad_wire_necking on
 bus diagonal
-fanout 20
-route 100
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-route 100 16
-clean 10
-filter 20
+fanout 5
+route 50
+clean 2
+route 50 16
+clean 2
+filter 5
 recorner diagonal
 status_file
 

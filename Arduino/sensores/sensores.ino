@@ -1,11 +1,13 @@
 // Pines de sensores
 #define SensorLeft 12
-#define SensorMiddle 11  
+#define SensorMiddle 6  
 #define SensorRight 10
+#define SensorBack 4
 
 int izq = 0;
 int der = 0;
 int cen = 0;
+int back = 0;
 
 // Variables para monitoreo periódico
 unsigned long ultimoReporte = 0;
@@ -16,6 +18,7 @@ void setup() {
   pinMode(SensorLeft, INPUT);
   pinMode(SensorMiddle, INPUT);
   pinMode(SensorRight, INPUT);
+  pinMode(SensorBack, INPUT);
   
   // Iniciar comunicación serial
   Serial.begin(9600);
@@ -30,6 +33,7 @@ void loop() {
   izq = digitalRead(SensorLeft);  // Invertir: línea=1, sin línea=0
   der = digitalRead(SensorRight); // Invertir: línea=1, sin línea=0
   cen = digitalRead(SensorMiddle); // Invertir: línea=1, sin línea=0
+  back = digitalRead(SensorBack); 
   
   // Mostrar estado de sensores solo cada 2 segundos
   if (millis() - ultimoReporte >= INTERVALO_REPORTE) {
@@ -40,7 +44,9 @@ void loop() {
     Serial.print(" C:"); 
     Serial.print(cen);
     Serial.print(" D:");
-    Serial.println(der);
+    Serial.print(der);
+    Serial.print(" D:");
+    Serial.println(back);
     ultimoReporte = millis();
   }
   

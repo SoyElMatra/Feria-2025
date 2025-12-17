@@ -1,17 +1,17 @@
 // PINES CORREGIDOS CON ENA/ENB
-#define ENA 3       // PWM Motor Izquierdo - PIN 3
+#define ENA 3       // PWM Motor Izquierdo - PIN 3 //10
 #define IN1 A5      // Dirección 
 #define IN2 A4      // Dirección
 
-#define ENB 5       // PWM Motor Derecho - PIN 5  
+#define ENB 5       // PWM Motor Derecho - PIN 5  //8
 #define IN3 A3      // Dirección
 #define IN4 A2      // Dirección
 
 // SENSORES
-#define SensorLeft 10
-#define SensorMiddle 6  
+#define SensorLeft 6
+#define SensorMiddle 10  
 #define SensorRight 12
-#define SensorBack 
+#define SensorBack 4    //9
 
 // Variables de sensores
 int L, C, R, B;
@@ -91,6 +91,7 @@ void loop() {
     L = digitalRead(SensorLeft);
     C = digitalRead(SensorMiddle);
     R = digitalRead(SensorRight);
+    B = digitalRead(SensorBack);
     
     // Enviar estado de sensores por Bluetooth periódicamente
     static unsigned long ultimoReporte = 0;
@@ -101,7 +102,7 @@ void loop() {
       Serial.print(C);
       Serial.print(":R:");
       Serial.print(R);
-      Serial.print(":B:")
+      Serial.print(":B:");
       Serial.println(B);
       ultimoReporte = millis();
     }
@@ -117,7 +118,7 @@ void loop() {
     // Lógica de detección automática
     if (L == 0 && C == 1 && R == 0) {
       avanzar();
-      Serial.println("avaznzar");
+      Serial.println("avanzar");
     }
     else if (L == 1 && C == 1 && R == 0) {
       Serial.println("EVENTO:CRUCE_IZQUIERDA");
@@ -169,12 +170,15 @@ void procesarComando(char comando) {
               L = digitalRead(SensorLeft);
               C = digitalRead(SensorMiddle);
               R = digitalRead(SensorRight);
+              B = digitalRead(SensorBack);
               Serial.print("SENSORES:L:");
               Serial.print(L);
               Serial.print(":C:");
               Serial.print(C);
               Serial.print(":R:");
-              Serial.println(R);
+              Serial.print(R);
+              Serial.print(":B:");
+              Serial.println(B);
               break;
       
     case '+':
@@ -267,11 +271,14 @@ void secuenciaCruceIzquierda() {
   
 
   //antirrebote, 
-  // Girar hasta que centro=1 y laterales=0 o tiempo máximo alcanzado
-  while (!(C == 1 && L == 0 && R == 0) && (millis() - inicioGiro < tiempoMaximoGiro)) {
+  // Girar hasta que centro=1, back=1 y laterales=0 o tiempo máximo alcanzado
+ while (!(C == 1 && L == 0 && R == 0 && B == 1) && (millis() - inicioGiro < tiempoMaximoGiro)) {
+    
+    delay(100);
     L = digitalRead(SensorLeft);
     C = digitalRead(SensorMiddle);
     R = digitalRead(SensorRight);
+    B = digitalRead(SensorBack);
     delay(10);
   }
   
@@ -319,13 +326,14 @@ void secuenciaCruceDerecha() {
   //C = digitalRead(SensorMiddle);
   //R = digitalRead(SensorRight);
   
-  // Girar hasta que centro=1 y laterales=0 o tiempo máximo alcanzado
-  while (!(C == 1 && L == 0 && R == 0) && (millis() - inicioGiro < tiempoMaximoGiro)) {
+  // Girar hasta que centro=1, back=1 y laterales=0 o tiempo máximo alcanzado
+  while (!(C == 1 && L == 0 && R == 0 && B == 1) && (millis() - inicioGiro < tiempoMaximoGiro)) {
     
     delay(100);
     L = digitalRead(SensorLeft);
     C = digitalRead(SensorMiddle);
     R = digitalRead(SensorRight);
+    B = digitalRead(SensorBack);
     delay(10);
   }
   
@@ -396,14 +404,14 @@ void decisionAleatoriaCruce(String tipoCruce) {
     secuenciaCruceDerecha();
   }
   else if (tipoCruce == "T") {
-    if (decision < 5) {
+    if (decision < 40) {
       Serial.println("ACCION:AVANZAR_40%");
       pararMotores();
       delay(500);
       avanzar();
       delay(300);
     }
-    else if (decision < 50) {
+    else if (decision < 70) {
       Serial.println("ACCION:GIRO_IZQUIERDA_30%");
       secuenciaCruceIzquierda();
     }
