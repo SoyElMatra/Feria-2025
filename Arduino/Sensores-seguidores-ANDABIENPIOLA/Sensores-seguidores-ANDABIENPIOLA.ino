@@ -1,26 +1,26 @@
 // ----- Pines de sensores (entrada) -----
-const int PIN_SENSOR_IZQ = 6;   // Sensor izquierdo (pin PWM usado como digital)
-const int PIN_SENSOR_CEN = 10;  // Sensor central   (pin PWM usado como digital)
-const int PIN_SENSOR_DER = 12;  // Sensor derecho   (pin digital)
+const int PIN_SENSOR_IZQ = 8;   // Sensor izquierdo (pin PWM usado como digital)
+const int PIN_SENSOR_CEN = 9;  // Sensor central   (pin PWM usado como digital)
+const int PIN_SENSOR_DER = 10;  // Sensor derecho   (pin digital)
 
 // ----- Pines de control de motores (salida) -----
-const int PIN_MOTOR_IZQ_PWM = 3;  // Velocidad motor izquierdo (PWM)
-const int PIN_MOTOR_DER_PWM = 5;  // Velocidad motor derecho   (PWM)
+const int PIN_MOTOR_IZQ_PWM = 6;  // Velocidad motor izquierdo (PWM)
+const int PIN_MOTOR_DER_PWM = 7;  // Velocidad motor derecho   (PWM)
 
-const int PIN_MOTOR_IZQ_RETRO = A1;   // IN1 - Marcha atrás izquierdo
-const int PIN_MOTOR_IZQ_AVANCE = A5;  // IN2 - Avance izquierdo
-const int PIN_MOTOR_DER_RETRO = A4;   // IN3 - Marcha atrás derecho
-const int PIN_MOTOR_DER_AVANCE = A3;  // IN4 - Avance derecho
+const int PIN_MOTOR_IZQ_RETRO = A4;   // IN1 - Marcha atrás izquierdo
+const int PIN_MOTOR_IZQ_AVANCE = A3;  // IN2 - Avance izquierdo
+const int PIN_MOTOR_DER_RETRO = A2;   // IN3 - Marcha atrás derecho
+const int PIN_MOTOR_DER_AVANCE = A1;  // IN4 - Avance derecho
 
 // ----- Variables globales -----
 unsigned char valorSensorIzq;  // LOW = negro, HIGH = blanco
 unsigned char valorSensorCen;
 unsigned char valorSensorDer;
-const int t = 500;
+const int t = 25;
 bool brusco = 0;
 
-unsigned char velocidadIzq = 100;  // Velocidad base motor izquierdo
-unsigned char velocidadDer = 100;  // Velocidad base motor derecho
+unsigned char velocidadIzq = 125;  // Velocidad base motor izquierdo
+unsigned char velocidadDer = 125;  // Velocidad base motor derecho
 int estadoCoche = 0;               // Variable de estado (no utilizada en la lógica principal)
 
 void configurarSensores() {
@@ -70,7 +70,7 @@ void leerSensores() {
   valorSensorIzq = digitalRead(PIN_SENSOR_IZQ);
   valorSensorCen = digitalRead(PIN_SENSOR_CEN);
   valorSensorDer = digitalRead(PIN_SENSOR_DER);
-  Serial.println(valorSensorCen);
+  Serial.println(brusco);
   if (valorSensorCen == HIGH) {
     if (valorSensorIzq == HIGH) {
       estadoCoche = 2;
@@ -111,7 +111,8 @@ void girar() {
           break;
         }
       }
-    } else if (estadoCoche == 2) {
+    }
+    if (estadoCoche == 2) {
       Serial.println("DerBrusco");
       giroDerBrusco();
       while (valorSensorDer == LOW) {
@@ -128,9 +129,25 @@ void girar() {
     if (estadoCoche == 1) {
       Serial.println("Izq");
       giroIzq();
+      /*while (valorSensorIzq == LOW) {
+        valorSensorIzq = digitalRead(PIN_SENSOR_IZQ);
+        valorSensorCen = digitalRead(PIN_SENSOR_CEN);
+        valorSensorDer = digitalRead(PIN_SENSOR_DER);
+        if (valorSensorCen == HIGH or valorSensorDer == HIGH) {
+          break;
+        }
+      }*/
     } else if (estadoCoche == 2) {
       Serial.println("Der");
       giroDer();
+      /*while (valorSensorDer == LOW) {
+        valorSensorIzq = digitalRead(PIN_SENSOR_IZQ);
+        valorSensorCen = digitalRead(PIN_SENSOR_CEN);
+        valorSensorDer = digitalRead(PIN_SENSOR_DER);
+        if (valorSensorCen == HIGH or valorSensorIzq == HIGH) {
+          break;
+        }
+      }*/
     }
   }
 }
@@ -148,7 +165,7 @@ void avanzar() {
 
 
 void giroDer() {
-  fijarVelocidad(velocidadIzq, velocidadDer);
+  fijarVelocidad(velocidadIzq + t, velocidadDer);
   digitalWrite(PIN_MOTOR_DER_RETRO, LOW);
   digitalWrite(PIN_MOTOR_DER_AVANCE, LOW);
   digitalWrite(PIN_MOTOR_IZQ_RETRO, LOW);
@@ -158,7 +175,7 @@ void giroDer() {
 
 
 void giroDerBrusco() {
-  fijarVelocidad(velocidadIzq, velocidadDer);
+  fijarVelocidad(velocidadIzq + t, velocidadDer);
   digitalWrite(PIN_MOTOR_DER_RETRO, HIGH);
   digitalWrite(PIN_MOTOR_DER_AVANCE, LOW);
   digitalWrite(PIN_MOTOR_IZQ_RETRO, LOW);
@@ -168,7 +185,7 @@ void giroDerBrusco() {
 
 
 void giroIzq() {
-  fijarVelocidad(velocidadIzq, velocidadDer);
+  fijarVelocidad(velocidadIzq, velocidadDer + t);
   digitalWrite(PIN_MOTOR_DER_RETRO, LOW);
   digitalWrite(PIN_MOTOR_DER_AVANCE, HIGH);
   digitalWrite(PIN_MOTOR_IZQ_RETRO, LOW);
@@ -178,7 +195,7 @@ void giroIzq() {
 
 
 void giroIzqBrusco() {
-  fijarVelocidad(velocidadIzq, velocidadDer);
+  fijarVelocidad(velocidadIzq, velocidadDer + t);
   digitalWrite(PIN_MOTOR_DER_RETRO, LOW);
   digitalWrite(PIN_MOTOR_DER_AVANCE, HIGH);
   digitalWrite(PIN_MOTOR_IZQ_RETRO, HIGH);
